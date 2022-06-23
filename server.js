@@ -20,9 +20,12 @@ MongoClient.connect(dbConnectionString)
     .catch(error => console.log(error))
 
 app.set('view engine', 'pug')
+app.set('views', './public/views')
 app.use(express.static('public'))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(cors())
+
+app.get('/', (req, res) => res.render('index.pug'))
 
 app.listen(process.env.PORT || PORT, () => console.log(`Server listening in port ${process.env.PORT || PORT}`))
